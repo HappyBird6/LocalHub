@@ -135,54 +135,25 @@
             }
         }
 
-        .location-area {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 15px 15px 0;
+        .input-area {
+            display: flex;
+            padding: 15px;
             background: white;
             border-top: 1px solid #eee;
         }
 
-        .location-field label {
-            display: block;
-            margin: 0 0 6px 4px;
-            color: #555;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .location-field input,
         .input-area input {
-            width: 100%;
+            flex: 1;
             border: 1px solid #ddd;
             padding: 10px 15px;
             border-radius: 20px;
             outline: none;
             font-size: 14px;
+            margin-right: 10px;
         }
 
-        .location-field input:focus,
         .input-area input:focus {
             border-color: #667eea;
-        }
-
-        .location-help {
-            grid-column: 1 / -1;
-            padding: 0 4px;
-            color: #777;
-            font-size: 11px;
-        }
-
-        .input-area {
-            display: flex;
-            gap: 10px;
-            padding: 15px;
-            background: white;
-        }
-
-        .input-area input {
-            flex: 1;
         }
 
         .input-area button {
@@ -229,39 +200,10 @@
             </div>
         </div>
 
-        <div class="location-area">
-            <div class="location-field">
-                <label for="latitudeInput">위도 (latitude)</label>
-                <input
-                    type="number"
-                    id="latitudeInput"
-                    min="-90"
-                    max="90"
-                    step="any"
-                    value="37.5665"
-                    placeholder="예: 37.5665"
-                >
-            </div>
-            <div class="location-field">
-                <label for="longitudeInput">경도 (longitude)</label>
-                <input
-                    type="number"
-                    id="longitudeInput"
-                    min="-180"
-                    max="180"
-                    step="any"
-                    value="126.9780"
-                    placeholder="예: 126.9780"
-                >
-            </div>
-            <div class="location-help">두 값을 모두 비우면 marker 없이 전송됩니다.</div>
-        </div>
-
         <div class="input-area">
-            <input
-                type="text"
-                id="messageInput"
-                maxlength="1000"
+            <input 
+                type="text" 
+                id="messageInput" 
                 placeholder="메시지를 입력하세요... (예: 서울 축제)"
                 onkeypress="handleEnter(event)"
             >
@@ -272,43 +214,14 @@
     <script>
         // ⚙️ 설정
         const API_URL = 'http://localhost:8000';
+        const USER_ID = 3; // 테스트 사용자 ID
 
         // 📨 메시지 전송
         async function sendMessage() {
             const input = document.getElementById('messageInput');
-            const latitudeInput = document.getElementById('latitudeInput');
-            const longitudeInput = document.getElementById('longitudeInput');
             const message = input.value.trim();
-            const latitudeText = latitudeInput.value.trim();
-            const longitudeText = longitudeInput.value.trim();
 
             if (!message) return;
-
-            let marker;
-            const hasLatitude = latitudeText !== '';
-            const hasLongitude = longitudeText !== '';
-
-            if (hasLatitude !== hasLongitude) {
-                displayError('위도와 경도는 둘 다 입력하거나 둘 다 비워주세요.');
-                return;
-            }
-
-            if (hasLatitude && hasLongitude) {
-                const latitude = Number(latitudeText);
-                const longitude = Number(longitudeText);
-
-                if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
-                    displayError('위도는 -90 이상 90 이하의 숫자여야 합니다.');
-                    return;
-                }
-
-                if (!Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
-                    displayError('경도는 -180 이상 180 이하의 숫자여야 합니다.');
-                    return;
-                }
-
-                marker = { latitude, longitude };
-            }
 
             // 사용자 메시지 화면에 표시
             displayMessage('user', message);
@@ -325,8 +238,8 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message,
-                        ...(marker && { marker })
+                        user_id: USER_ID,
+                        message: message
                     })
                 });
 

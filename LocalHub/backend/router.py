@@ -71,6 +71,15 @@ def read_root():
 #         response=response,
 #         categories=categories
 #     )
+"""
+{
+  "message": "주변 관광지를 알려줘",
+  "marker": {
+    "latitude": 37.5665,
+    "longitude": 126.978
+  }
+}
+"""
 @router.post("/api/chat",response_model=ChatResponse,)
 def chat_endpoint(req: Request,request: ChatRequest,db: Session = Depends(get_db),):
     # Step 1: AI가 intent와 검색 조건 분석
@@ -156,6 +165,8 @@ def chat_endpoint(req: Request,request: ChatRequest,db: Session = Depends(get_db
                     f"{category_text} "
                     f"{len(items)}곳을 찾았어요."
                 )
+                
+                print("검색 결과 items:", items)
             else:
                 response_message = (
                     f"선택한 위치에서 "
@@ -182,8 +193,7 @@ def chat_endpoint(req: Request,request: ChatRequest,db: Session = Depends(get_db
                     f"'{keyword}' 검색 결과 "
                     f"{len(items)}곳을 찾았어요."
                 )
-
-            else:
+            else:   
                 response_message = (
                     f"'{keyword}'에 해당하는 "
                     "장소를 찾지 못했어요."
