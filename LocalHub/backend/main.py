@@ -16,6 +16,5 @@ app.add_middleware(
 # 테이블 생성
 Base.metadata.create_all(bind=engine)
 
-
 # ✅ router.py의 라우트 포함
 app.include_router(router)
