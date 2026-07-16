@@ -8,7 +8,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", 
                    "http://localhost:8000",
-                   "https://localhub-b04-pyj-ljm.netlify.app/"],
+                   "https://localhub-b04-pyj-ljm.netlify.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
