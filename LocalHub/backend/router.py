@@ -7,28 +7,27 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 # 데이터베이스 및 모델
-from utils import *
-from database import get_db
-from models import *
-from schemas import *
-from chatbot import *
+from .database import get_db
+from .models import *
+from .schemas import *
+from .chatbot import *
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
-from chatbot import (
+from .chatbot import (
     analyze_query,
     get_general_chat_response,
 )
-from database import get_db
-from models import Chat
-from schemas import (
+from .database import get_db
+from .models import Chat
+from .schemas import (
     ChatRequest,
     ChatResponse,
 )
-from services.post_search import (
+from .services.post_search import (
     search_nearby_posts,
 )
-from services.tour_search import (
+from .services.tour_search import (
     search_nearby_tour_places,
     search_tour_places_by_title,
 )

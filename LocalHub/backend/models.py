@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float
 from sqlalchemy.orm import relationship
-from database import Base
+from .database import Base
 import datetime
 
 ############### 모델 정의하는 곳 ###############

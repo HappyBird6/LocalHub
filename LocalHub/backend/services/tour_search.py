@@ -6,7 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from services.distance import calculate_distance_km
+from .distance import calculate_distance_km
 
 
 # 현재 파일 위치에 따라 조정하세요.

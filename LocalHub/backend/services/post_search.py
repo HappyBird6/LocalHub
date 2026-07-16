@@ -4,16 +4,16 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from models import Post
-from services.distance import calculate_distance_km
+from ..models import Post
+from .distance import calculate_distance_km
 
 
 from typing import Any
 
 from sqlalchemy.orm import Session
 
-from models import Post
-from services.distance import calculate_distance_km
+from ..models import Post
+from .distance import calculate_distance_km
 
 
 def search_nearby_posts(
