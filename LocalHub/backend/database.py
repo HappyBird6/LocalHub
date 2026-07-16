@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pathlib import Path
 
-DATABASE_URL = "sqlite:///./test.db"
+# DATABASE_URL = "sqlite:///./test.db"
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = BASE_DIR / "app.db"
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
