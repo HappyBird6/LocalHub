@@ -235,7 +235,7 @@ def chat_endpoint(req: Request,request: ChatRequest,db: Session = Depends(get_db
 @router.get("/api/posts")
 def get_posts(req: Request, db: Session = Depends(get_db)):
     # [Step 1] 데이터베이스에서 게시글 조회
-    posts = db.query(Post).all()
+    posts = db.query(Post).order_by(Post.created_at.desc(),Post.id.desc()).all()
     # [Step 2] 프론트엔드에 JSON 응답 반환
     return [PostResponse(
         id=post.id,
@@ -254,7 +254,7 @@ def get_posts(req: Request, db: Session = Depends(get_db)):
 @router.get("/api/posts/category/{category}")
 def get_posts_by_category(req: Request, category: int, db: Session = Depends(get_db)):
     # [Step 1] 데이터베이스에서 게시글 조회 (카테고리별)
-    posts = db.query(Post).filter(Post.category == category).all()
+    posts = db.query(Post).filter(Post.category == category).order_by(Post.created_at.desc(), Post.id.desc()).all()
     
     # [Step 2] 프론트엔드에 JSON 응답 반환
     return [PostResponse(
