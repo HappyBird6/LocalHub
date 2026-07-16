@@ -16,7 +16,7 @@ class ChatResponse(BaseModel):
     categories: list[str] = Field(default_factory=list)     # 질의 유형 (관광지, 축제, 음식점 등)
 
     intent: Optional[str] = None  # 사용자의 의도 (선택적)
-    item: list[dict[str, Any]] = Field(default_factory=list)  # 관련 항목 (선택적)
+    items: list[dict[str, Any]] = Field(default_factory=list)  # 관련 항목 (선택적)
 
     requires_marker: Optional[bool] = False  # 마커 표시 여부 (선택적)
 ## 프론트엔트 요청 JSON 예시
